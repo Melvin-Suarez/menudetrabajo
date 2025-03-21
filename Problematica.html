@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Falta de Inventario - Soluciones y Automatización</title>
+    <link rel="stylesheet" href="estilos.css">
+    <link rel="stylesheet" href= "Animacion.css">
+</head>
+<body>
+
+    <header>
+        <h1>Falta de Inventario - Soluciones y Automatización</h1>
+    </header>
+
+    <div class="container">
+        <section class="introduccion">
+            <h1>Introducción</h1>
+            <p>La falta de inventario es un problema común que afecta a muchas empresas, especialmente en el sector minorista y de manufactura. Este problema puede tener un impacto significativo en la satisfacción del cliente, la eficiencia operativa y, en última instancia, en los resultados financieros de la empresa.</p>
+        </section>
+
+        <section class="problematica">
+            <h2>¿Qué es la falta de inventario?</h2>
+            <p>La falta de inventario ocurre cuando una empresa no tiene suficiente stock de productos para satisfacer la demanda de los clientes. Esto puede deberse a una variedad de razones, como una mala planificación, problemas en la cadena de suministro, o un aumento inesperado en la demanda.</p>
+        </section>
+
+        <section class="consecuencias">
+            <h2>Consecuencias de la falta de inventario</h2>
+            <ul>
+                <li>Pérdida de ventas y clientes</li>
+                <li>Insatisfacción del cliente</li>
+                <li>Daño a la reputación de la marca</li>
+                <li>Aumento de costos debido a pedidos urgentes</li>
+            </ul>
+        </section>
+
+        <section class="soluciones">
+            <h2>Soluciones para la falta de inventario</h2>
+            <p>Para mitigar la falta de inventario, las empresas pueden implementar varias estrategias, como:</p>
+            <ul>
+                <li>Mejorar la planificación y pronóstico de la demanda</li>
+                <li>Optimizar la gestión de la cadena de suministro</li>
+                <li>Implementar sistemas de gestión de inventario en tiempo real</li>
+                <li>Establecer relaciones sólidas con proveedores</li>
+            </ul>
+            <a href="#automatizacion" class="btn">Ver Automatización</a>
+        </section>
+
+        <section class="automatizacion" id="automatizacion">
+            <h2>Automatización de la Gestión de Inventario</h2>
+            <p>La automatización es clave para evitar la falta de inventario. Aquí te explicamos cómo puedes implementarla:</p>
+            <h3>Pasos para Automatizar</h3>
+            <ul>
+                <li><strong>Sistema de Gestión de Inventario (SGI):</strong> Usa software como Odoo, Zoho Inventory o TradeGecko.</li>
+                <li><strong>Base de Datos en Tiempo Real:</strong> Almacena la información del inventario en bases de datos como MySQL, PostgreSQL o Firebase.</li>
+                <li><strong>Integración con Puntos de Venta (POS):</strong> Conecta tu sistema de inventario con tu tienda en línea o POS.</li>
+                <li><strong>Alertas Automáticas:</strong> Configura notificaciones por correo, SMS o Slack cuando el stock esté bajo.</li>
+                <li><strong>Automatización de Pedidos:</strong> Usa herramientas como Zapier para enviar órdenes de compra automáticamente a proveedores.</li>
+            </ul>
+            <h3>Ejemplo de Automatización con Firebase y Node.js</h3>
+            <p>Aquí tienes un ejemplo básico de cómo verificar el stock y enviar alertas:</p>
+            <pre>
+                <code>
+const firebase = require('firebase/app');
+require('firebase/database');
+
+// Configura Firebase
+const firebaseConfig = {
+    apiKey: "TU_API_KEY",
+    authDomain: "TU_AUTH_DOMAIN",
+    databaseURL: "TU_DATABASE_URL",
+    projectId: "TU_PROJECT_ID",
+    storageBucket: "TU_STORAGE_BUCKET",
+    messagingSenderId: "TU_SENDER_ID",
+    appId: "TU_APP_ID"
+};
+
+firebase.initializeApp(firebaseConfig);
+const database = firebase.database();
+
+// Función para verificar el stock
+function verificarStock() {
+    const ref = database.ref('productos');
+    ref.once('value', (snapshot) => {
+        const productos = snapshot.val();
+        for (let id in productos) {
+            const producto = productos[id];
+            if (producto.stock < producto.stock_minimo) {
+                console.log(`¡Alerta! Stock bajo para ${producto.nombre}. Stock actual: ${producto.stock}`);
+                // Aquí puedes agregar código para enviar una notificación (email, SMS, etc.)
+            }
+        }
+    });
+}
+
+// Ejecuta la verificación cada hora
+setInterval(verificarStock, 3600000); // 3600000 ms = 1 hora
+                </code>
+            </pre>
+        </section>
+
+        <section class="herramientas">
+            <h2>Herramientas Recomendadas</h2>
+            <ul>
+                <li><strong>Gestión de Inventario:</strong> Odoo, Zoho Inventory, TradeGecko.</li>
+                <li><strong>Bases de Datos:</strong> Firebase, MySQL, PostgreSQL.</li>
+                <li><strong>Automatización:</strong> Zapier, Integromat, Make.</li>
+                <li><strong>Notificaciones:</strong> Twilio (SMS), EmailJS (correos), Slack (notificaciones en equipo).</li>
+                <li><strong>Dashboards:</strong> Tableau, Power BI, Google Data Studio.</li>
+            </ul>
+        </section>
+    </div>
+    <!-- Contenedor de la animación de flujo -->
+    <div class="flow-container" id="flowContainer"></div>
+
+    <!-- Contenido principal -->
+    <div class="container">
+        <a href="#" class="btn">Explorar Más</a>
+    </div>
+
+    <footer>
+        <p>&copy; 2023 - Todos los derechos reservados</p>
+    </footer>
+
+</body>
+</html>
+<body>
+
+
+    <Script src="Flujo.js"></Script>
+</body>
+</html>

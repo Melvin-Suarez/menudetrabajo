@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transición Compleja - Efectos Visuales</title>
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #fff;
+            background-color: #1a1a1a;
+            overflow-x: hidden;
+        }
+
+        /* Animación de fondo */
+        @keyframes gradientBackground {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        body {
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradientBackground 15s ease infinite;
+        }
+
+        /* Contenedor principal */
+        .container {
+            position: relative;
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+
+        /* Efecto de entrada para las secciones */
+        .section {
+            margin: 50px 0;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            transform: translateX(-100%);
+            opacity: 0;
+            transition: transform 1s ease, opacity 1s ease;
+        }
+
+        .section.visible {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        /* Animación 3D para títulos */
+        h1, h2 {
+            text-align: center;
+            transform: perspective(500px) rotateY(90deg);
+            opacity: 0;
+            transition: transform 1s ease, opacity 1s ease;
+        }
+
+        h1.visible, h2.visible {
+            transform: perspective(500px) rotateY(0deg);
+            opacity: 1;
+        }
+
+        /* Botones con efecto hover */
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px 0;
+            background-color: #3498db;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #2980b9;
+            transform: scale(1.1);
+        }
+
+        /* Efecto de partículas en el fondo */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            animation: float 5s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) translateX(0);
+            }
+            25% {
+                transform: translateY(-50px) translateX(50px);
+            }
+            50% {
+                transform: translateY(50px) translateX(-50px);
+            }
+            75% {
+                transform: translateY(-50px) translateX(-50px);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Fondo de partículas -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Contenido principal -->
+    <div class="container">
+        <h1 id="title1">Bienvenido a una Transición Compleja</h1>
+        <section class="section" id="section1">
+            <h2>problematica</h2>
+            <p>Esta es una sección con una transición compleja. Observa cómo los elementos aparecen con efectos 3D y movimiento.</p>
+            <a href="Pantalladecarga.html" class="btn">Ir a la problematica</a>
+        </section>
+
+        <section class="section" id="section2">
+            <h2>Sección 2</h2>
+            <p>Aquí hay más contenido con efectos visuales avanzados. Las transiciones son suaves y dinámicas.</p>
+            <a href="#section3" class="btn">Ir a la Sección 3</a>
+        </section>
+
+        <section class="section" id="section3">
+            <h2>Sección 3</h2>
+            <p>La última sección también tiene efectos impresionantes. ¡Disfruta de la experiencia visual!</p>
+            <a href="#title1" class="btn">Volver al Inicio</a>
+        </section>
+    </div>
+
+    <script>
+        // JavaScript para animar las secciones y títulos
+        const sections = document.querySelectorAll('.section');
+        const titles = document.querySelectorAll('h1, h2');
+
+        function checkVisibility() {
+            sections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                if (rect.top < window.innerHeight * 0.8 && rect.bottom >= 0) {
+                    section.classList.add('visible');
+                }
+            });
+
+            titles.forEach(title => {
+                const rect = title.getBoundingClientRect();
+                if (rect.top < window.innerHeight * 0.8 && rect.bottom >= 0) {
+                    title.classList.add('visible');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', checkVisibility);
+        window.addEventListener('load', checkVisibility);
+
+        // Generar partículas para el fondo
+        const particlesContainer = document.getElementById('particles');
+
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            particle.style.left = `${Math.random() * 100}vw`;
+            particle.style.top = `${Math.random() * 100}vh`;
+            particle.style.animationDuration = `${Math.random() * 3 + 2}s`;
+            particlesContainer.appendChild(particle);
+
+            setTimeout(() => {
+                particle.remove();
+            }, 5000);
+        }
+
+        setInterval(createParticle, 300);
+    </script>
+
+</body>
+</html>
